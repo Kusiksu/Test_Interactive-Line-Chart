@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Interactive Line Chart for A/B test statistics visualization",
   "private": true,
-  "homepage": "https://Kusiksu.github.io/interactive-line-chart",
+  "homepage": "https://kusiksu.github.io/Test_Interactive-Line-Chart/",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

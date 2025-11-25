@@ -3,6 +3,6 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/<Test_Interactive-Line-Chart>/',
+  base: '/Test_Interactive-Line-Chart/',
 });
 
