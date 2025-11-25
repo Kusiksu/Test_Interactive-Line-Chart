@@ -11,6 +11,18 @@ import {
   ResponsiveContainer,
   ReferenceLine,
 } from 'recharts';
+
+type CanvasOptionsWithScale = {
+  background?: string;
+  scale?: number;
+  useCORS?: boolean;
+  allowTaint?: boolean;
+  logging?: boolean;
+  width?: number;
+  height?: number;
+  windowWidth?: number;
+  windowHeight?: number;
+};
 import { ChartData, TimeRange, LineStyle, Theme } from '../../types';
 import { processData, getVariationKey, getVariationName } from '../../utils/dataProcessor';
 import styles from './Chart.module.css';
@@ -86,7 +98,6 @@ export const Chart: React.FC<ChartProps> = ({ data, onThemeChange }) => {
     const visiblePoints = Math.floor(totalPoints / zoomLevel);
     const maxOffset = Math.max(0, totalPoints - visiblePoints);
 
-    // Ограничиваем смещение
     const clampedOffset = Math.max(0, Math.min(panOffset, maxOffset));
     const startIndex = Math.floor(clampedOffset);
     const endIndex = Math.min(startIndex + visiblePoints - 1, totalPoints - 1);
@@ -306,17 +317,20 @@ export const Chart: React.FC<ChartProps> = ({ data, onThemeChange }) => {
       await new Promise(resolve => setTimeout(resolve, 100));
       
       // Улучшенные настройки для захвата всех элементов
-      const canvas = await html2canvas(chartRef.current, {
-        backgroundColor: theme === 'dark' ? '#1a1a1a' : '#ffffff',
-        scale: 3,
-        useCORS: true,
-        allowTaint: false,
-        logging: false,
-        width: chartRef.current.scrollWidth,
-        height: chartRef.current.scrollHeight,
-        windowWidth: chartRef.current.scrollWidth,
-        windowHeight: chartRef.current.scrollHeight,
-      });
+      const canvas = await html2canvas(
+        chartRef.current,
+        {
+          background: theme === 'dark' ? '#1a1a1a' : '#ffffff',
+          scale: 3,
+          useCORS: true,
+          allowTaint: false,
+          logging: false,
+          width: chartRef.current.scrollWidth,
+          height: chartRef.current.scrollHeight,
+          windowWidth: chartRef.current.scrollWidth,
+          windowHeight: chartRef.current.scrollHeight,
+        } as CanvasOptionsWithScale
+      );
       
       selectReplacements.forEach(({ select, replacement }) => {
         select.style.visibility = 'visible';
