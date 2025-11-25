@@ -1,0 +1,379 @@
+.chartContainer {
+  background: white;
+  border-radius: 0;
+  padding: 24px;
+  box-shadow: none;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s, color 0.3s;
+  overflow: auto;
+}
+
+.chartContainer.dark {
+  background: #1a1a1a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.chartHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.chartTitle {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  transition: color 0.3s;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.chartContainer.dark .chartTitle {
+  color: #fff;
+}
+
+.leftControls,
+.rightControls {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.controlGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.controlLabel {
+  font-size: 12px;
+  color: #666;
+  font-weight: 500;
+}
+
+.chartContainer.dark .controlLabel {
+  color: #ccc;
+}
+
+.variationsSelect,
+.timeRangeSelect,
+.lineStyleSelect {
+  padding: 8px 12px;
+  border: 1px solid #e0e0e0;
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+  transition: all 0.2s;
+  min-width: 180px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left 8px center;
+  padding-left: 32px;
+}
+
+.variationsSelect:hover,
+.timeRangeSelect:hover,
+.lineStyleSelect:hover {
+  border-color: #4a90e2;
+}
+
+.variationsSelect:focus,
+.timeRangeSelect:focus,
+.lineStyleSelect:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.1);
+}
+
+.chartContainer.dark .variationsSelect,
+.chartContainer.dark .timeRangeSelect,
+.chartContainer.dark .lineStyleSelect {
+  background: #2a2a2a;
+  border-color: #444;
+  color: #ccc;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ccc' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left 8px center;
+}
+
+.chartContainer.dark .variationsSelect:hover,
+.chartContainer.dark .timeRangeSelect:hover,
+.chartContainer.dark .lineStyleSelect:hover {
+  border-color: #4a90e2;
+}
+
+.iconButtons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.iconButton {
+  padding: 8px;
+  border: 1px solid #e0e0e0;
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+.iconButton:hover:not(:disabled) {
+  border-color: #4a90e2;
+  color: #4a90e2;
+  background: #f0f7ff;
+}
+
+.iconButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.chartContainer.dark .iconButton {
+  background: #2a2a2a;
+  border-color: #444;
+  color: #ccc;
+}
+
+.chartContainer.dark .iconButton:hover:not(:disabled) {
+  border-color: #4a90e2;
+  color: #4a90e2;
+  background: #1a2a3a;
+}
+
+.chartWrapper {
+  width: 100%;
+  flex: 1;
+  min-height: 400px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chartArea {
+  flex: 1;
+  position: relative;
+  user-select: none;
+}
+
+.zoomControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  background: #f8f8f8;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  height: 32px;
+}
+
+.chartContainer.dark .zoomControls {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+.zoomButton {
+  padding: 4px;
+  border: 1px solid #e0e0e0;
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.zoomButton:hover:not(:disabled) {
+  border-color: #4a90e2;
+  color: #4a90e2;
+  background: #f0f7ff;
+  transform: scale(1.05);
+}
+
+.zoomButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.chartContainer.dark .zoomButton {
+  background: #333;
+  border-color: #555;
+  color: #ccc;
+}
+
+.chartContainer.dark .zoomButton:hover:not(:disabled) {
+  border-color: #4a90e2;
+  color: #4a90e2;
+  background: #1a2a3a;
+}
+
+.zoomSlider {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  height: 24px;
+  min-width: 150px;
+}
+
+.zoomTrack {
+  width: 100%;
+  height: 4px;
+  background: #e0e0e0;
+  border-radius: 2px;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
+.chartContainer.dark .zoomTrack {
+  background: #444;
+}
+
+.zoomFill {
+  height: 100%;
+  background: #4a90e2;
+  border-radius: 3px;
+  transition: width 0.2s;
+}
+
+.zoomThumb {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  background: white;
+  border: 2px solid #4a90e2;
+  border-radius: 50%;
+  cursor: grab;
+  transition: left 0.2s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.zoomThumb:active {
+  cursor: grabbing;
+}
+
+.chartContainer.dark .zoomThumb {
+  background: #2a2a2a;
+  border-color: #4a90e2;
+}
+
+.tooltip {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  font-size: 12px;
+}
+
+.tooltipDate {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tooltipItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 4px;
+}
+
+.tooltipItem:last-child {
+  margin-bottom: 0;
+}
+
+.tooltipLabel {
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tooltipDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.tooltipValue {
+  font-weight: 600;
+  color: #333;
+}
+
+.tooltipDark {
+  background: #2a2a2a !important;
+  border-color: #444 !important;
+}
+
+.tooltipDark .tooltipDate {
+  color: #fff !important;
+}
+
+.tooltipDark .tooltipLabel {
+  color: #ccc !important;
+}
+
+.tooltipDark .tooltipValue {
+  color: #fff !important;
+}
+
+@media (max-width: 900px) {
+  .chartHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .leftControls,
+  .rightControls {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 671px) {
+  .chartContainer {
+    padding: 16px;
+  }
+
+  .chartWrapper {
+    min-height: 300px;
+  }
+
+  .variationsSelect,
+  .timeRangeSelect,
+  .lineStyleSelect {
+    font-size: 12px;
+    padding: 6px 10px;
+    padding-left: 28px;
+    min-width: 150px;
+  }
+}

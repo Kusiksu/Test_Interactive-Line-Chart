@@ -1,73 +1,91 @@
-# Test Assignment: Interactive Line Chart
+# Interactive Line Chart - A/B Test Statistics
 
-## Goal
+Интерактивный линейный график для визуализации статистики A/B тестов с анализом коэффициента конверсии.
 
-Build an interactive **Line Chart** to visualize A/B test statistics.
+## Технологический стек
 
-The project **must be published on GitHub Pages**.
+- **React 18** + **TypeScript**
+- **Recharts** - библиотека визуализации
+- **Vite** - сборщик проекта
+- **CSS Modules** - стилизация компонентов
+- **html2canvas** - экспорт в PNG
 
----
+## Выбранная библиотека визуализации
 
-## Data
+**Recharts** - выбрана за отличную интеграцию с React, поддержку TypeScript, богатый набор компонентов и простоту использования.
 
-Use data from `data.json`, which contains fields `date`, `visits`, and `conversions` for each variation.
+## Реализованные функции
 
-You need to calculate:
+### Основные требования
 
-```js
-conversionRate = (conversions / visits) * 100;
+- Линейный график conversion rate для всех вариаций (в процентах)
+- Интерактивность: вертикальная линия и tooltip при наведении
+- Минимум одна вариация всегда выбрана
+- Автоматическая адаптация осей X и Y к видимым данным
+- Все значения отображаются в процентах
+- Адаптивный дизайн (671px - 1300px)
+- Селектор вариаций (dropdown)
+- Переключатель День / Неделя
+
+### Бонусные функции
+
+- **Zoom / Reset zoom** - кастомный контрол зума с кнопками +/- и ползунком, панорамирование
+- **Line style selector** - выбор стиля: Line, Smooth, Area
+- **Light / Dark theme** - переключатель темы
+- **Export to PNG** - экспорт графика в высоком качестве
+
+## Установка и запуск
+
+### Предварительные требования
+
+- Node.js (версия 16 или выше)
+- npm или yarn
+
+### Локальная установка
+
+1. Клонируйте репозиторий
+   ```bash
+   git clone <repository-url>
+   cd frontend-interview-task
+   ```
+
+2. Установите зависимости
+   ```bash
+   npm install
+   ```
+
+3. Запустите dev сервер
+   ```bash
+   npm run dev
+   ```
+   Приложение будет доступно по адресу `http://localhost:5173`
+
+4. Сборка для production
+   ```bash
+   npm run build
+   ```
+
+5. Превью production сборки
+   ```bash
+   npm run preview
+   ```
+
+## Структура проекта
+
 ```
-
----
-
-## Design
-
-The design mockup is provided in the file `mockup.sketch`.
-
-You can open it using **[Lunacy](https://icons8.ru/lunacy)** — a free Sketch-compatible design tool available for all operating systems.
-
----
-
-## Requirements
-
-- Display a **conversion rate (conversionRate)** line chart for all variations, showing all values as **percentages**.
-- On **hover**, show a **vertical line** and a **popup** with daily data.
-- At least **one variation must always be selected**.
-- When variations are toggled, both X and Y axes must **adapt automatically** to the visible data range.
-- Display all values as **percentages**.
-- Responsive layout for screens between **671 px** and **1300 px**.
-- Controls:
-  - **Variations selector** (choose which lines to display)
-  - **Day / Week selector**
-
----
-
-## Bonus Features
-
-- Zoom / Reset zoom
-- Line style selector (`Line`, `Smooth`, `Area`)
-- Light / Dark theme toggle
-- Export chart to PNG
-
----
-
-## Tech Stack
-
-- **React + TypeScript**
-- Any charting library (e.g. **D3**, **VisX**, **Recharts**, etc.)
-- Use **CSS Modules** for component styling.
-- The project must:
-  1. Be published on **GitHub Pages**
-  2. Include a **README** with setup instructions and a short feature overview
-
----
-
-## Deliverables
-
-1. GitHub repository with full source code
-2. Live demo on GitHub Pages
-3. Clear README including:
-   - Chosen visualization library
-   - Implemented and bonus features
-   - Local setup instructions
+frontend-interview-task/
+├── src/
+│   ├── components/Chart/
+│   │   ├── Chart.tsx
+│   │   └── Chart.module.css
+│   ├── utils/dataProcessor.ts
+│   ├── types.ts
+│   ├── App.tsx
+│   ├── main.tsx
+│   ├── data.json
+│   └── index.css
+├── package.json
+├── tsconfig.json
+└── vite.config.ts
+```
 
